@@ -1,0 +1,21 @@
+{
+  "name": "astra-sdk",
+  "version": "1.0.0",
+  "description": "Astra Finance JS SDK",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "repository": "git@github.com:getfursure/astra-sdk.git",
+  "author": "Fursure Engineering @getfursure",
+  "license": "none",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
