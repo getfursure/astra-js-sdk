@@ -9,13 +9,23 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "test": "jest"
   },
   "repository": "git@github.com:getfursure/astra-sdk.git",
   "author": "Fursure Engineering @getfursure",
   "license": "none",
   "private": true,
   "dependencies": {
-    "axios": "^0.27.2"
+    "ajv": "^8.11.0",
+    "axios": "^0.27.2",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.4",
+    "@types/lodash": "^4.14.182",
+    "jest": "^28.1.2",
+    "ts-jest": "^28.0.5",
+    "typescript": "^4.7.4"
   }
 }

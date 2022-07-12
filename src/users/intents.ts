@@ -1,22 +1,25 @@
 import axios, { Axios, AxiosError, AxiosResponse } from "axios";
+import Ajv from "ajv";
+import { snakeCase } from 'lodash';
+import { AstraError } from "../lib/AstraError";
 import { AstraResponse } from "../lib/AstraResponse";
 
 export interface UserIntentRequest {
   email: string,
   phone: string,
-  first_name: string,
-  last_name: string,
-  preferred_first_name?: string,
-  preferred_last_name?: string,
-  preferred_pronouns?: string,
+  firstName: string,
+  lastName: string,
+  preferredFirstName?: string,
+  preferredLastName?: string,
+  preferredPronouns?: string,
   address1: string,
   address2?: string,
   city: string,
   state: string,
-  postal_code: string,
-  date_of_birth: string,
+  postalCode: string,
+  dateOfBirth: string,
   ssn: string,
-  ip_address: string
+  ipAddress: string
 }
 
 export interface CreateUserIntentResponse {
@@ -32,16 +35,48 @@ export class Intents {
   }
 
   async create(request: UserIntentRequest): Promise<AstraResponse<CreateUserIntentResponse>> {
+
     try {
+      const ajv = new Ajv({ allErrors: true });
+
+      const schema = {
+        type: "object",
+        properties: {
+          email: { type: "string" },
+          phone: { type: "string" },
+          firstName: { type: "string" },
+          lastName: { type: "string" },
+          preferredFirstName: { type: "string", nullable: true },
+          preferredLastName: { type: "string", nullable: true },
+          preferredPronouns: { type: "string", nullable: true },
+          address1: { type: "string" },
+          address2: { type: "string", nullable: true },
+          city: { type: "string" },
+          state: { type: "string" },
+          postalCode: { type: "string" },
+          dateOfBirth: { type: "string" },
+          ssn: { type: "string" },
+          ipAddress: { type: "string" }
+        },
+        required: ["email", "phone", "firstName", "lastName", "address1", "city", "state", "postalCode", "dateOfBirth", "ssn", "ipAddress"],
+        additionalProperties: false,
+      }
+
+      const validate = ajv.compile(schema);
+
+      if (!validate(request)) {
+        throw new Error(ajv.errorsText(validate.errors))
+      }
+
       const response = await this._client
-        .post<CreateUserIntentResponse, AxiosResponse<CreateUserIntentResponse>, UserIntentRequest>(this._path, request);
+        .post<CreateUserIntentResponse, AxiosResponse<CreateUserIntentResponse | AstraError>, UserIntentRequest>(this._path, request);
       if (axios.isAxiosError(response)) {
         const responseError = response as AxiosError;
         return { code: responseError.code, message: responseError.message, status: responseError.status }
       }
       return response.data;
     } catch (e) {
-      return { code: "", message: "" }
+      throw new Error(e.message);
     }
   }
 }
