@@ -1,8 +1,8 @@
 import axios, { Axios, AxiosError, AxiosResponse } from "axios";
-import Ajv from "ajv";
 import { snakeCase } from 'lodash';
 import { AstraError } from "../lib/AstraError";
 import { AstraResponse } from "../lib/AstraResponse";
+import createUserIntentValidator from "./validators/createUserIntentValidator";
 
 export interface UserIntentRequest {
   email: string,
@@ -37,32 +37,7 @@ export class Intents {
   async create(request: UserIntentRequest): Promise<AstraResponse<CreateUserIntentResponse>> {
 
     try {
-      const ajv = new Ajv({ allErrors: true });
-
-      const schema = {
-        type: "object",
-        properties: {
-          email: { type: "string" },
-          phone: { type: "string" },
-          firstName: { type: "string" },
-          lastName: { type: "string" },
-          preferredFirstName: { type: "string", nullable: true },
-          preferredLastName: { type: "string", nullable: true },
-          preferredPronouns: { type: "string", nullable: true },
-          address1: { type: "string" },
-          address2: { type: "string", nullable: true },
-          city: { type: "string" },
-          state: { type: "string" },
-          postalCode: { type: "string" },
-          dateOfBirth: { type: "string" },
-          ssn: { type: "string" },
-          ipAddress: { type: "string" }
-        },
-        required: ["email", "phone", "firstName", "lastName", "address1", "city", "state", "postalCode", "dateOfBirth", "ssn", "ipAddress"],
-        additionalProperties: false,
-      }
-
-      const validate = ajv.compile(schema);
+      const { validate, ajv } = createUserIntentValidator();
 
       if (!validate(request)) {
         throw new Error(ajv.errorsText(validate.errors))
