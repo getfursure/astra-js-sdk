@@ -1,9 +1,9 @@
 {
-  "name": "@getfursure/astra-sdk",
+  "name": "@getfursure/astra-js-sdk",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org"
   },
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Astra Finance JS SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,7 @@
     "prepare": "npm run build",
     "test": "jest"
   },
-  "repository": "git@github.com:getfursure/astra-sdk.git",
+  "repository": "git@github.com:getfursure/astra-js-sdk.git",
   "author": "Fursure Engineering @getfursure",
   "license": "BSD-3-Clause",
   "dependencies": {
