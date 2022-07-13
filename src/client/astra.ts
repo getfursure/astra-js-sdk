@@ -37,7 +37,7 @@ export class Astra {
       throw Error("Base URL is required. You can find the available options at https://docs.astra.finance/#introduction")
     }
 
-    if (baseUrl as string != "https://api.astra.finance" || baseUrl as string != "https://api-sandbox.astra.finance") {
+    if (baseUrl as string != "https://api.astra.finance" && baseUrl as string != "https://api-sandbox.astra.finance") {
       throw Error("Invalid Base URL value. You can find the available options at https://docs.astra.finance/#introduction")
     }
 
@@ -50,7 +50,16 @@ export class Astra {
   }
 
   private _initHttpClient = () => {
-    this._client = new axios.Axios({ baseURL: this._baseUrl, auth: { username: this._clientId, password: this._clientSecret } })
+    this._client = new axios.Axios({
+      baseURL: this._baseUrl, auth: { username: this._clientId, password: this._clientSecret },
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      transformRequest: [function (data) {
+        return JSON.stringify(data);
+      }]
+    })
   }
 
   private _initResources = () => {
