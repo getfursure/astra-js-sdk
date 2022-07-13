@@ -58,6 +58,9 @@ export class Astra {
       },
       transformRequest: [function (data) {
         return JSON.stringify(data);
+      }],
+      transformResponse: [function (data) {
+        return JSON.parse(data);
       }]
     })
   }

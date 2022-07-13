@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Astra Finance JS SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
