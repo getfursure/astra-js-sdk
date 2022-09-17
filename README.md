@@ -125,6 +125,8 @@ Please refer to the [Documentation](https://example.com)
 - [ ] Documentation
 - [ ] Routines Resource
 - [ ] Cards Resource
+- [ ] Testing
+- [ ] Linting and Formating
 
 See the [open issues](https://github.com/getfursure/astra-js-sdk/issues) for a full list of proposed features (and known issues).
 
