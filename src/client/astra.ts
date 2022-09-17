@@ -59,11 +59,18 @@ export class Astra {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      transformRequest: [function (data) {
-        return JSON.stringify(data);
+      transformRequest: [function (data, headers) {
+        if (headers != null && [headers['Content-Type'], headers['content-type']].indexOf('application/json') > -1) {
+          return JSON.stringify(data)
+        }
+        return data
       }],
-      transformResponse: [function (data) {
-        return JSON.parse(data);
+      transformResponse: [function (data, headers) {
+        const acceptHeader: string | undefined = headers != null ? headers['Accept'] ?? headers['accept'] : undefined;
+        if (acceptHeader == 'application/json' || acceptHeader == null || acceptHeader?.length === 0) {
+          return JSON.parse(data);
+        }
+        return data;
       }]
     })
   }
