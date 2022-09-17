@@ -1,5 +1,5 @@
 import axios, { Axios } from 'axios';
-import { Users } from "../users";
+import { Users } from "../resources/users";
 import {AuthResource} from "../resources/auth/auth";
 
 export enum BaseURL {
