@@ -1,7 +1,7 @@
 import axios, { Axios, AxiosError, AxiosResponse } from "axios";
 import { omit } from "lodash";
-import transformRequest from '../lib/utils/transformRequest';
-import { AstraResponse } from "../lib/AstraResponse";
+import transformRequest from '../../lib/utils/transformRequest';
+import { AstraResponse } from "../../lib/AstraResponse";
 import createUserIntentValidator from "./validators/createUserIntentValidator";
 
 export interface UserIntentRequest {
