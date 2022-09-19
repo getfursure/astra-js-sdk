@@ -18,15 +18,10 @@ Unofficial Astra Finance SDK
 [![MIT License][license-shield]][license-url]
 
 
-
-<!-- PROJECT LOGO -->
-<br />
-
 <div align="center">
-
     <h3 align="center">project_title</h3>
 
-    <p align="center">
+    <p style="text-align: center">
         project_description
         <br />
         <a href="https://github.com/getfursure/astra-js-sdk"><strong>Documentation »</strong></a>
