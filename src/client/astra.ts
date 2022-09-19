@@ -1,5 +1,6 @@
 import axios, { Axios } from 'axios';
-import { Users } from "../users";
+import { Users } from "../resources/users";
+import {AuthResource} from "../resources/auth/auth";
 
 export enum BaseURL {
   Sandbox = "https://api-sandbox.astra.finance",
@@ -12,11 +13,12 @@ export interface AstraClientOptions {
 }
 
 export class Astra {
-  private _baseUrl: string;
-  private _clientId: string;
-  private _clientSecret: string;
-  private _client: Axios;
+  readonly _baseUrl: string;
+  protected _clientId: string;
+  protected _clientSecret: string;
+  protected _client: Axios;
   users: Users;
+  auth: AuthResource;
 
   constructor(options: AstraClientOptions) {
     if (!options) {
@@ -47,25 +49,41 @@ export class Astra {
 
     this._initHttpClient();
     this._initResources();
+    this._initExtendedResources();
   }
 
-  private _initHttpClient = () => {
+  protected _initHttpClient = () => {
     this._client = new axios.Axios({
       baseURL: this._baseUrl, auth: { username: this._clientId, password: this._clientSecret },
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      transformRequest: [function (data) {
-        return JSON.stringify(data);
+      transformRequest: [function (data, headers) {
+        if (headers != null && [headers['Content-Type'], headers['content-type']].indexOf('application/json') > -1) {
+          return JSON.stringify(data)
+        }
+        return data
       }],
-      transformResponse: [function (data) {
-        return JSON.parse(data);
+      transformResponse: [function (data, headers) {
+        const acceptHeader: string | undefined = headers != null ? headers['Accept'] ?? headers['accept'] : undefined;
+        if (acceptHeader == 'application/json' || acceptHeader == null || acceptHeader?.length === 0) {
+          return JSON.parse(data);
+        }
+        return data;
       }]
     })
   }
 
-  private _initResources = () => {
+  protected _initResources = () => {
+    this.auth = new AuthResource(this._client, this._clientId, this._clientSecret)
     this.users = new Users(this._client);
+  }
+
+  /**
+   * Intended for other projects to either override a specific resource or add in additional missing ones
+   */
+  protected _initExtendedResources = () => {
+
   }
 }
