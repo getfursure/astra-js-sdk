@@ -1,7 +1,20 @@
-# Astra SDK
-Unofficial Astra Finance SDK
-
 <a name="readme-top"></a>
+
+<div>
+ <h1 style="text-align: center;">Astra SDK</h1>
+
+ <p style="text-align: center;">
+  The Unofficial Astra Finance SDK
+     <br />
+     <a href="https://github.com/getfursure/astra-js-sdk"><strong>Documentation</strong></a>
+     ·
+     <a href="https://github.com/getfursure/astra-js-sdk/issues">Report Bug</a>
+     ·
+     <a href="https://github.com/getfursure/astra-js-sdk/issues">Request Feature</a>
+ </p>
+</div>
+
+<br />
 
 <!-- PROJECT SHIELDS -->
 <!--
@@ -17,24 +30,7 @@ Unofficial Astra Finance SDK
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-
-<div align="center">
-    <h3 align="center">project_title</h3>
-
-    <p style="text-align: center">
-        project_description
-        <br />
-        <a href="https://github.com/getfursure/astra-js-sdk"><strong>Documentation »</strong></a>
-        <br />
-        <br />
-        ·
-        <a href="https://github.com/getfursure/astra-js-sdk/issues">Report Bug</a>
-        ·
-        <a href="https://github.com/getfursure/astra-js-sdk/issues">Request Feature</a>
-    </p>
-</div>
-
-
+<br />
 
 <!-- TABLE OF CONTENTS -->
 <details>
