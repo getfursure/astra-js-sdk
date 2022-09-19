@@ -1,8 +1,7 @@
 <a name="readme-top"></a>
 
-<div>
+<div style="display: flex; justify-content: center; flex-direction: column;">
  <h1 style="text-align: center;">Astra SDK</h1>
-
  <p style="text-align: center;">
   The Unofficial Astra Finance SDK
      <br />
