@@ -24,7 +24,7 @@ export interface AstraRoutineResponse {
   preferred_settlement_speed: string
   frequency: string
   client_correlation_id: string
-  active: boolean
+  active: 'True' | 'False' //Seriously Astra?
   status: RoutineStatuses
   created: string // eg. '2020-01-15T15:12:04.746260'
 }
@@ -52,7 +52,6 @@ export interface AstraCreateRoutineRequest {
   amount_start?: number
   client_correlation_id?: string
   status?: RoutineStatuses
-  active: 'True' | 'False' //Seriously Astra?
   amount_increment?: number
   minimum_transaction_threshold?: number
   percent_of_transaction?: number
