@@ -52,6 +52,7 @@ export interface AstraCreateRoutineRequest {
   amount_start?: number
   client_correlation_id?: string
   status?: RoutineStatuses
+  active: 'True' | 'False' //Seriously Astra?
   amount_increment?: number
   minimum_transaction_threshold?: number
   percent_of_transaction?: number
