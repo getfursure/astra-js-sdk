@@ -1,12 +1,12 @@
-import { Axios } from "axios";
-import { Intents } from "./intents";
+import { Axios } from 'axios'
+import { Intents } from './intents'
 
 export class Users {
-  private _client: Axios;
+  private _client: Axios
 
-  intents: Intents;
+  intents: Intents
   constructor(client: Axios) {
-    this._client = client;
-    this.intents = new Intents(this._client);
+    this._client = client
+    this.intents = new Intents(this._client)
   }
 }
