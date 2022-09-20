@@ -87,6 +87,7 @@ export class Astra {
         },
       ],
     })
+    this._attachLoggers(this._client.interceptors.request, this._client.interceptors.response)
   }
 
   protected _initResources() {
@@ -100,5 +101,19 @@ export class Astra {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   protected _initExtendedResources() {}
 
-  }
+  /**
+   * @example
+   * import * as AxiosLogger from 'axios-logger';
+   *
+   * class MyAstra extends Astra {
+   *   protected override _attachLoggers (request: AxiosInterceptorManager<any>, response: AxiosInterceptorManager<any>) {
+   *      request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger)
+   *      response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger)
+   *   }
+   * }
+   *
+   * @protected
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-empty-function
+  protected _attachLoggers(request: AxiosInterceptorManager<any>, response: AxiosInterceptorManager<any>) {}
 }
