@@ -1,10 +1,9 @@
-import { snakeCase } from 'lodash';
+import { snakeCase } from 'lodash'
 
-export default function (request: Object) {
-  const transformed = {};
+export default function (request: object) {
+  const transformed = {}
   for (const key in request) {
-    const value = request[key];
-    transformed[snakeCase(key)] = value;
+    transformed[snakeCase(key)] = request[key]
   }
-  return transformed;
+  return transformed
 }

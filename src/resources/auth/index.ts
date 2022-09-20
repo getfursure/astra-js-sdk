@@ -1,11 +1,10 @@
 import { Axios } from 'axios'
-import {AstraResponse} from "../../lib/AstraResponse";
-import {AstraResponseError} from "../../lib/AstraResponseError";
+import { AstraResponse } from '../../lib/AstraResponse'
+import { AstraResponseError } from '../../lib/AstraResponseError'
 
 export interface AstraCreateAccessTokenRequest {
   code: string
   redirect_uri: string
-  request_id: string | undefined
 }
 
 export interface AstraAccessTokenResponse {
@@ -34,9 +33,6 @@ export class AuthResource {
   async createAccessToken(request: AstraCreateAccessTokenRequest): Promise<AstraResponse<AstraAccessTokenResponse>> {
     const headers: { [key: string]: string } = {
       'Content-Type': 'application/x-www-form-urlencoded',
-    }
-    if (request.request_id != null) {
-      headers['request_id'] = request.request_id
     }
 
     const response = await this._client.post(

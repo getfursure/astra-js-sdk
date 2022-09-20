@@ -1,8 +1,8 @@
 <a name="readme-top"></a>
 
-<div style="display: flex; justify-content: center; flex-direction: column;">
+<div align="center" style="display: flex; justify-content: center; flex-direction: column;">
  <h1 style="text-align: center;">Astra SDK</h1>
- <p style="text-align: center;">
+ <p align="center" style="text-align: center;">
   The Unofficial Astra Finance SDK
      <br />
      <a href="https://github.com/getfursure/astra-js-sdk"><strong>Documentation</strong></a>
@@ -60,7 +60,7 @@
 
 [Astra](https://astra.finance) currently does not offer an official JavaScript SDK for their HTTP/s API
 
-<p style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
+<p align="center" style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -96,7 +96,7 @@ To get a local copy up and running follow these simple example steps.
    astraClient.auth.createAccessToken(...);
    ```
 
-<p style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
+<p align="center" style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -105,7 +105,7 @@ To get a local copy up and running follow these simple example steps.
 
 Please refer to the [Documentation](https://example.com)
 
-<p style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
+<p align="center" style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -120,7 +120,7 @@ Please refer to the [Documentation](https://example.com)
 
 See the [open issues](https://github.com/getfursure/astra-js-sdk/issues) for a full list of proposed features (and known issues).
 
-<p style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
+<p align="center" style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -137,7 +137,7 @@ If you have a suggestion that would make this better, please fork the repo and c
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
+<p align="center" style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -146,7 +146,7 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 Distributed under the MIT License. See `LICENSE.md` for more information.
 
-<p style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
+<p align="center" style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -154,7 +154,7 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 ## Contact
 Open an issue [https://github.com/getfursure/astra-js-sdk/issues](https://github.com/getfursure/astra-js-sdk/issues)
 
-<p style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
+<p align="center" style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -162,7 +162,7 @@ Open an issue [https://github.com/getfursure/astra-js-sdk/issues](https://github
 ## Acknowledgments
 
 
-<p style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
+<p align="center" style="text-align: right;">(<a href="#readme-top">back to top</a>)</p>
 
 
 
