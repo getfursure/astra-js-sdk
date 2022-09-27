@@ -1,7 +1,9 @@
 import axios, { Axios, AxiosInterceptorManager } from 'axios'
-import { Users } from '../resources/users'
+
 import { AuthResource } from '../resources/auth'
+import { CardsResource } from './../resources/cards/index'
 import { RoutinesResource } from '../resources/routines'
+import { Users } from '../resources/users'
 
 export enum BaseURL {
   Sandbox = 'https://api-sandbox.astra.finance',
@@ -22,6 +24,7 @@ export class Astra {
   users: Users
   auth: AuthResource
   routines: RoutinesResource
+  cards: CardsResource
 
   constructor(options: AstraClientOptions) {
     if (!options) {
@@ -96,6 +99,7 @@ export class Astra {
     this.auth = new AuthResource(this._client, this._clientId, this._clientSecret)
     this.users = new Users(this._client)
     this.routines = new RoutinesResource(this._client, this.auth)
+    this.cards = new CardsResource(this._client, this.auth)
   }
 
   /**
