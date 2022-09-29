@@ -21,7 +21,3 @@ export interface AstraTransfersListResponse {
   count: number
   transfers: AstraTransferResponse[]
 }
-
-export interface AstraGetTransferRequest {
-  id: string
-}
