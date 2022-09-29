@@ -4,6 +4,7 @@ import { AuthResource } from '../resources/auth'
 import { CardsResource } from './../resources/cards/index'
 import { RoutinesResource } from '../resources/routines'
 import { Users } from '../resources/users'
+import { TransfersResource } from '../resources/transfers'
 
 export enum BaseURL {
   Sandbox = 'https://api-sandbox.astra.finance',
@@ -25,6 +26,7 @@ export class Astra {
   auth: AuthResource
   routines: RoutinesResource
   cards: CardsResource
+  transfers: TransfersResource
 
   constructor(options: AstraClientOptions) {
     if (!options) {
@@ -100,6 +102,7 @@ export class Astra {
     this.users = new Users(this._client)
     this.routines = new RoutinesResource(this._client, this.auth)
     this.cards = new CardsResource(this._client, this.auth)
+    this.transfers = new TransfersResource(this._client, this.auth)
   }
 
   /**
