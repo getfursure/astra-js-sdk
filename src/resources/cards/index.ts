@@ -5,6 +5,8 @@ import { AstraResponse } from '../../lib/AstraResponse'
 import { AstraResponseError } from '../../lib/AstraResponseError'
 import { AuthResource } from '../auth'
 
+export * from './types'
+
 /**
  * https://docs.astra.finance/#cards
  */
