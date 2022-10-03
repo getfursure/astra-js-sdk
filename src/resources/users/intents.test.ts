@@ -7,7 +7,7 @@ describe('Users > intents', () => {
 
   describe('create', () => {
     it('throws if a required request parameter is missing', async () => {
-      const intents = new Intents(mockAxios)
+      const intents = new Intents(mockAxios, '1', '2')
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const create = () => intents.create({ email: 'test@test.com' } as any)
       await expect(create()).rejects.toThrowError(
