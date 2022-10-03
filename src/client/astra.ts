@@ -99,7 +99,7 @@ export class Astra {
 
   protected _initResources() {
     this.auth = new AuthResource(this._client, this._clientId, this._clientSecret)
-    this.users = new Users(this._client)
+    this.users = new Users(this._client, this.auth)
     this.routines = new RoutinesResource(this._client, this.auth)
     this.cards = new CardsResource(this._client, this.auth)
     this.transfers = new TransfersResource(this._client, this.auth)

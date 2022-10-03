@@ -3,6 +3,7 @@ import { omit } from 'lodash'
 import transformRequest from '../../lib/utils/transformRequest'
 import { AstraResponse } from '../../lib/AstraResponse'
 import createUserIntentValidator from './validators/createUserIntentValidator'
+import { AuthResource } from '../auth'
 
 export interface UserIntentRequest {
   email: string
@@ -29,13 +30,11 @@ export interface CreateUserIntentResponse {
 export class Intents {
   protected _path = 'v1/user_intent'
   protected _client: Axios
-  protected _clientId: string
-  protected _clientSecret: string
+  protected _authResource: AuthResource
 
-  constructor(client: Axios, clientId: string, clientSecret: string) {
+  constructor(client: Axios, auth: AuthResource) {
     this._client = client
-    this._clientId = clientId
-    this._clientSecret = clientSecret
+    this._authResource = auth
   }
 
   async create(request: UserIntentRequest): Promise<AstraResponse<CreateUserIntentResponse>> {
@@ -57,10 +56,7 @@ export class Intents {
         AxiosResponse<CreateUserIntentResponse>,
         UserIntentRequest
       >(this._path, transformedRequest, {
-        auth: {
-          username: this._clientId,
-          password: this._clientSecret,
-        },
+        auth: this._authResource.basicAuth,
       })
 
       if (axios.isAxiosError(data)) {

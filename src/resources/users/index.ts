@@ -1,12 +1,12 @@
 import { Axios } from 'axios'
 import { Intents } from './intents'
+import { AuthResource } from '../auth'
 
 export class Users {
-  private _client: Axios
-
   intents: Intents
-  constructor(client: Axios) {
-    this._client = client
-    this.intents = new Intents(this._client)
+  auth: AuthResource
+
+  constructor(client: Axios, auth: AuthResource) {
+    this.intents = new Intents(client, this.auth)
   }
 }
