@@ -3,6 +3,7 @@ import { omit } from 'lodash'
 import transformRequest from '../../lib/utils/transformRequest'
 import { AstraResponse } from '../../lib/AstraResponse'
 import createUserIntentValidator from './validators/createUserIntentValidator'
+import { AuthResource } from '../auth'
 
 export interface UserIntentRequest {
   email: string
@@ -27,21 +28,22 @@ export interface CreateUserIntentResponse {
 }
 
 export class Intents {
-  private _path = 'v1/user_intent'
+  protected _path = 'v1/user_intent'
+  protected _client: Axios
+  protected _authResource: AuthResource
 
-  private _client: Axios
-  constructor(client: Axios) {
+  constructor(client: Axios, auth: AuthResource) {
     this._client = client
+    this._authResource = auth
   }
 
   async create(request: UserIntentRequest): Promise<AstraResponse<CreateUserIntentResponse>> {
+    const { validate, ajv } = createUserIntentValidator()
+
+    if (!validate(request)) {
+      throw new Error(ajv.errorsText(validate.errors))
+    }
     try {
-      const { validate, ajv } = createUserIntentValidator()
-
-      if (!validate(request)) {
-        throw new Error(ajv.errorsText(validate.errors))
-      }
-
       // This request to astra has mixed casing, both snake and camel as seen in the omitted fields below
       const transformedRequest = {
         ...transformRequest(omit(request, ['address1', 'address2'])),
@@ -53,7 +55,9 @@ export class Intents {
         CreateUserIntentResponse,
         AxiosResponse<CreateUserIntentResponse>,
         UserIntentRequest
-      >(this._path, transformedRequest)
+      >(this._path, transformedRequest, {
+        auth: this._authResource.basicAuth,
+      })
 
       if (axios.isAxiosError(data)) {
         const responseError = data as AxiosError

@@ -1,4 +1,4 @@
-import { Axios } from 'axios'
+import { Axios, AxiosBasicCredentials } from 'axios'
 import { AstraResponse } from '../../lib/AstraResponse'
 import { AstraResponseError } from '../../lib/AstraResponseError'
 
@@ -30,6 +30,13 @@ export class AuthResource {
     this._clientSecret = clientSecret
   }
 
+  get basicAuth(): AxiosBasicCredentials {
+    return {
+      username: this._clientId,
+      password: this._clientSecret,
+    }
+  }
+
   async createAccessToken(request: AstraCreateAccessTokenRequest): Promise<AstraResponse<AstraAccessTokenResponse>> {
     const headers: { [key: string]: string } = {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -40,10 +47,7 @@ export class AuthResource {
       `grant_type=authorization_code&code=${request.code}&redirect_uri=${request.redirect_uri}`,
       {
         headers,
-        auth: {
-          username: this._clientId,
-          password: this._clientSecret,
-        },
+        auth: this.basicAuth,
       }
     )
 

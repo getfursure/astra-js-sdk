@@ -1,5 +1,6 @@
 import { Intents } from './intents'
 import axios from 'axios'
+import { AuthResource } from '../auth'
 
 describe('Users > intents', () => {
   jest.mock('axios')
@@ -7,7 +8,7 @@ describe('Users > intents', () => {
 
   describe('create', () => {
     it('throws if a required request parameter is missing', async () => {
-      const intents = new Intents(mockAxios)
+      const intents = new Intents(mockAxios, new AuthResource(mockAxios, '1', '2'))
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const create = () => intents.create({ email: 'test@test.com' } as any)
       await expect(create()).rejects.toThrowError(
