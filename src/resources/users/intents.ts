@@ -27,21 +27,24 @@ export interface CreateUserIntentResponse {
 }
 
 export class Intents {
-  private _path = 'v1/user_intent'
+  protected _path = 'v1/user_intent'
+  protected _client: Axios
+  protected _clientId: string
+  protected _clientSecret: string
 
-  private _client: Axios
-  constructor(client: Axios) {
+  constructor(client: Axios, clientId: string, clientSecret: string) {
     this._client = client
+    this._clientId = clientId
+    this._clientSecret = clientSecret
   }
 
   async create(request: UserIntentRequest): Promise<AstraResponse<CreateUserIntentResponse>> {
+    const { validate, ajv } = createUserIntentValidator()
+
+    if (!validate(request)) {
+      throw new Error(ajv.errorsText(validate.errors))
+    }
     try {
-      const { validate, ajv } = createUserIntentValidator()
-
-      if (!validate(request)) {
-        throw new Error(ajv.errorsText(validate.errors))
-      }
-
       // This request to astra has mixed casing, both snake and camel as seen in the omitted fields below
       const transformedRequest = {
         ...transformRequest(omit(request, ['address1', 'address2'])),
@@ -53,7 +56,12 @@ export class Intents {
         CreateUserIntentResponse,
         AxiosResponse<CreateUserIntentResponse>,
         UserIntentRequest
-      >(this._path, transformedRequest)
+      >(this._path, transformedRequest, {
+        auth: {
+          username: this._clientId,
+          password: this._clientSecret,
+        },
+      })
 
       if (axios.isAxiosError(data)) {
         const responseError = data as AxiosError
