@@ -22,6 +22,6 @@ module.exports = {
   ignorePatterns: ['/dist/**/*'],
   rules: {
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'off', /// There is a bug with eslint that I cannot resolve
+    '@typescript-eslint/no-unused-vars': 2,
   },
 }
