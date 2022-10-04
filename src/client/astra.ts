@@ -124,6 +124,6 @@ export class Astra {
    *
    * @protected
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
   protected _attachLoggers(request: AxiosInterceptorManager<any>, response: AxiosInterceptorManager<any>) {}
 }
