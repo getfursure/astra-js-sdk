@@ -7,6 +7,6 @@ export class Users {
   auth: AuthResource
 
   constructor(client: Axios, auth: AuthResource) {
-    this.intents = new Intents(client, this.auth)
+    this.intents = new Intents(client, auth)
   }
 }
