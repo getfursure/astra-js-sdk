@@ -5,6 +5,7 @@ import { AstraResponse } from '../../lib/AstraResponse'
 import createUserIntentValidator from './validators/createUserIntentValidator'
 import { AuthResource } from '../auth'
 import { AstraResponseError } from '../../lib/AstraResponseError'
+import { UserIntentStatus } from './types'
 
 export interface UserIntentRequest {
   email: string
@@ -30,6 +31,15 @@ export interface CreateUserIntentResponse {
 
 export interface GetUserIntentResponse {
   id: string
+  user_id: string
+  email: string
+  phone: string
+  first_name: string
+  last_name: string
+  preferred_first_name: string
+  preferred_last_name: string
+  preferred_pronouns: string
+  status: UserIntentStatus
 }
 
 export class Intents {
