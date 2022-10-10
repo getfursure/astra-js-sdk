@@ -82,9 +82,7 @@ export class Intents {
       const response = await this._client.get<GetUserIntentResponse, AxiosResponse<GetUserIntentResponse>>(
         `${this._path}/${id}`,
         {
-          headers: {
-            Authorization: `Bearer ${this._authResource.accessToken}`,
-          },
+          auth: this._authResource.basicAuth,
         }
       )
 
