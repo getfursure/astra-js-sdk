@@ -1,4 +1,4 @@
-export enum UserIntentStatus {
+export enum UserOrIntentStatus {
   APPROVED = 'approved',
   PENDING = 'pending',
   RETRY = 'retry',
