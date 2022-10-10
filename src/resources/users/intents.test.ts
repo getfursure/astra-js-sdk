@@ -20,6 +20,34 @@ describe('Users > intents', () => {
     mockAxios.reset()
   })
 
+  describe('getById()', () => {
+    it('returns a user intent', async () => {
+      // given
+      const data = {
+        id: '1a908838d703473ab52e6884c001e447',
+        user_id: '40e61a9e48384c00173ab528d7038847',
+        email: 'sir.edmund.hillary@gmail.com',
+        phone: '+15557771234',
+        first_name: 'Edmund',
+        last_name: 'Hillary',
+        preferred_first_name: 'Ed',
+        preferred_last_name: 'Hill',
+        preferred_pronouns: 'He/Him',
+        status: 'approved',
+      }
+
+      mockAxios
+        .onGet(`${BaseURL.Sandbox}/v1/user_intent/1a908838d703473ab52e6884c001e447`)
+        .reply(200, JSON.stringify(data))
+
+      // when
+      const result = await astraClient.users.intents.getById('1a908838d703473ab52e6884c001e447')
+
+      // then
+      expect(result).toEqual(data)
+      expect(mockAxios.history.get[0].url).toEqual(`v1/user_intent/1a908838d703473ab52e6884c001e447`)
+    })
+  })
   describe('create', () => {
     it('throws if a required request parameter is missing', async () => {
       const intents = new Intents(mockAxios, new AuthResource(mockAxios, '1', '2'))
