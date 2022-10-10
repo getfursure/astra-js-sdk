@@ -4,6 +4,7 @@ import transformRequest from '../../lib/utils/transformRequest'
 import { AstraResponse } from '../../lib/AstraResponse'
 import createUserIntentValidator from './validators/createUserIntentValidator'
 import { AuthResource } from '../auth'
+import { AstraResponseError } from '../../lib/AstraResponseError'
 
 export interface UserIntentRequest {
   email: string
@@ -24,6 +25,10 @@ export interface UserIntentRequest {
 }
 
 export interface CreateUserIntentResponse {
+  id: string
+}
+
+export interface GetUserIntentResponse {
   id: string
 }
 
@@ -64,6 +69,28 @@ export class Intents {
         return { code: responseError.code, message: responseError.message, status: responseError.status }
       }
       return data
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
+
+  async getById(id: string): Promise<AstraResponse<GetUserIntentResponse>> {
+    if (!id) {
+      throw new Error('Missing required user intent id')
+    }
+    try {
+      const response = await this._client.get<GetUserIntentResponse, AxiosResponse<GetUserIntentResponse>>(
+        `${this._path}/${id}`,
+        {
+          auth: this._authResource.basicAuth,
+        }
+      )
+
+      if (response.status > 200) {
+        throw new AstraResponseError(response.statusText, response.status, response.data)
+      }
+
+      return response.data
     } catch (e) {
       throw new Error(e.message)
     }
